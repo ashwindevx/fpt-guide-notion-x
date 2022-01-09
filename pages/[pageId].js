@@ -29,8 +29,8 @@ export async function getStaticPaths() {
   //     };
   //   }
 
-  const rootNotionPageId = "115747a37c704b8b9516ca221f850885";
-  const rootNotionSpaceId = "fdb51393-04ff-454f-8f94-9dd487b7ef27";
+  const rootNotionPageId = "5205ee376ebc4050a8bb94b9da83dcac";
+  const rootNotionSpaceId = "2303d035-6042-43e9-89d4-890b45490cb4";
 
   // This crawls all public pages starting from the given root page in order
   // for next.js to pre-generate all pages via static site generation (SSG).
@@ -54,6 +54,13 @@ export async function getStaticPaths() {
 }
 
 export default function NotionPage({ recordMap }) {
+  if (!recordMap) {
+    return null;
+  }
+
+  const title = getPageTitle(recordMap);
+  console.log(title, recordMap);
+
   return (
     <>
       <Head>
