@@ -1,7 +1,9 @@
+import Head from "next/head";
 import React from "react";
 
+import { getPageTitle, getAllPagesInSpace } from "notion-utils";
 import { NotionAPI } from "notion-client";
-import { NotionRenderer } from "react-notion-x";
+import { Collection, CollectionRow, NotionRenderer } from "react-notion-x";
 
 const isDev = process.env.NODE_ENV === "development" || !process.env.NODE_ENV;
 
@@ -53,6 +55,22 @@ export async function getStaticPaths() {
 
 export default function NotionPage({ recordMap }) {
   return (
-    <NotionRenderer recordMap={recordMap} fullPage={true} darkMode={false} />
+    <>
+      <Head>
+        <meta name="description" content="React Notion X demo renderer." />
+        <title>{title}</title>
+      </Head>
+
+      <NotionRenderer
+        recordMap={recordMap}
+        fullPage={true}
+        darkMode={false}
+        rootDomain="localhost:9090" // used to detect root domain links and open this in the same tab
+        components={{
+          collection: Collection,
+          collectionRow: CollectionRow,
+        }}
+      />
+    </>
   );
 }
