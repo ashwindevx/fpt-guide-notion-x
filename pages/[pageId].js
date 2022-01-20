@@ -1,11 +1,11 @@
 import Head from "next/head";
 import React from "react";
 
-import { getPageTitle, getAllPagesInSpace } from "notion-utils";
+import { getPageTitle, getAllPagesInSpace, getBlockIcon } from "notion-utils";
 import { NotionAPI } from "notion-client";
 import { Collection, CollectionRow, NotionRenderer } from "react-notion-x";
 
-const isDev = process.env.NODE_ENV === "development" || !process.env.NODE_ENV;
+// const isDev = process.env.NODE_ENV === "development" || !process.env.NODE_ENV;
 
 const notion = new NotionAPI();
 
@@ -59,12 +59,11 @@ export default function NotionPage({ recordMap }) {
   }
 
   const title = getPageTitle(recordMap);
-  console.log(title, recordMap);
 
   return (
     <>
       <Head>
-        <meta name="description" content="React Notion X demo renderer." />
+        <meta name="description" content={title} />
         <title>{title}</title>
       </Head>
 
